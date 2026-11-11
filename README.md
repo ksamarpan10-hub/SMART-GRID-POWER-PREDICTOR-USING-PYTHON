@@ -66,8 +66,47 @@ python smart_grid_predictor.py
 
 Step 5 prints the model comparison and forecast to the terminal, saves all figures and forecast_next_24h.csv to outputs/, and saves the trained models to models/.
 
-Google Colab: upload the files, then run !pip install -r requirements.txt, !python data_generator.py and !python smart_grid_predictor.py.
+Run in Google Colab
 
+Run each block as its own cell.
+
+Option A: upload the files
+
+python
+!pip install -q numpy pandas scikit-learn matplotlib seaborn joblib
+
+from google.colab import files
+files.upload()   # select data_generator.py and smart_grid_predictor.py
+
+Option B: clone from GitHub
+
+python
+!git clone https://github.com/<your-username>/smart-grid-power-predictor.git
+%cd smart-grid-power-predictor
+!pip install -q -r requirements.txt
+
+Generate data and run the project
+
+python
+!python data_generator.py
+!python smart_grid_predictor.py
+
+Show the graphs
+
+python
+from IPython.display import Image, display
+import glob
+
+for f in sorted(glob.glob("outputs/*.png")):
+    print(f)
+    display(Image(f))
+
+Download the results (optional)
+
+python
+from google.colab import files
+!zip -r results.zip outputs models smart_grid_data.csv
+files.download("results.zip")
 Outputs
 File	Content
 outputs/01_sample_week_overview.png	Demand, generation mix and weather for a sample week
